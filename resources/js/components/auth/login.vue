@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-
-@kapilverma994
-easylearningbd
-/
-laravel-vue
-1
-7
-33
-Code
-Issues
-Pull requests
-16
-Actions
-Projects
-Wiki
-Security
-Insights
-laravel-vue/resources/js/components/auth/login.vue
-@easylearningbd
-easylearningbd first commit
-Latest commit 4c4990f on May 24, 2020
- History
- 1 contributor
-105 lines (90 sloc)  2.82 KB
-
-
-
 <template>
 	<div>
 		<div class="row justify-content-center">
@@ -48,11 +14,11 @@ Latest commit 4c4990f on May 24, 2020
         <div class="form-group">
           <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
             placeholder="Enter Email Address" v-model="form.email">
-    <small class="text-danger" v-if="errors.email"> {{ errors.email[0] }} </small>
+    <small class="text-danger" >  </small>
         </div>
         <div class="form-group">
           <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" v-model="form.password">
- <small class="text-danger" v-if="errors.password"> {{ errors.password[0] }} </small>
+ <small class="text-danger" ></small>
         </div>
         <div class="form-group">
           <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -61,12 +27,14 @@ Latest commit 4c4990f on May 24, 2020
               Me</label>
           </div>
         </div>
+      
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block">Login </button>
         </div>
         <hr>
 
       </form>
+    
                   <hr>
                   <div class="text-center">
  <router-link to="/register" class="font-weight-bold small">Create an Account!</router-link>
@@ -90,57 +58,24 @@ Latest commit 4c4990f on May 24, 2020
 <script type="text/javascript">
 
   export default {
-    created(){
-      if (User.loggedIn()) {
-        this.$router.push({name: 'home'})
-      }
+data() {
+  return {
+    form:{
+      email:null,
+      password:null
     },
-    data(){
-    return {
-      form:{
-        email: null,
-        password: null
-      },
-      errors:{}
-    }
-  },
-  methods:{
-    login(){
-      axios.post('/api/auth/login',this.form)
-      .then(res => {
-        User.responseAfterLogin(res)
-        Toast.fire({
-          icon: 'success',
-          title: 'Signed in successfully'
-        })
-        this.$router.push({ name: 'home'})
-      })
-       .catch(error =>this.errors = error.response.data.errors)
-       .catch(
-            Toast.fire({
-              icon: 'warning',
-              title: 'Invalid Email or Password'
-            })
-        )
-    }
+    errors:[]
   }
+},
+methods:{
+  login(){
+axios.post('api/auth/login',this.form)
+.then(res=>User.responseAfterLogin(res))
+.catch((e)=>console.log(e.response.data.error))}
+},
   }
-</script>
-
-
+  </script>
 <style type="text/css">
 
 </style>
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
+
